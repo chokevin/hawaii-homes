@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
+	"errors"
 	"log"
 	"net"
 
-	hspb "github.com/chokevin/home/homeserver"
+	hspb "github.com/chokevin/protos/homeserver"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -15,8 +16,8 @@ type server struct {
 }
 
 var properties = []*hspb.GetPropertyResponse{
-	{Id: 1, Address: "123 Aloha St", City: "Honolulu", State: "HI", ZipCode: "96815", Price: 950000, Bedrooms: 3, Bathrooms: 2, SquareFeet: 1200},
-	{Id: 2, Address: "456 Beach Blvd", City: "Maui", State: "HI", ZipCode: "96753", Price: 1200000, Bedrooms: 4, Bathrooms: 3, SquareFeet: 1800},
+	{Id: 1, Address: "123 Aloha St", City: "Honolulu", State: "HI", ZipCode: "96815", Price: 950000},
+	{Id: 2, Address: "456 Beach Blvd", City: "Maui", State: "HI", ZipCode: "96753", Price: 1200000},
 }
 
 func (s *server) GetProperty(ctx context.Context, req *hspb.GetPropertyRequest) (*hspb.GetPropertyResponse, error) {
@@ -25,7 +26,7 @@ func (s *server) GetProperty(ctx context.Context, req *hspb.GetPropertyRequest) 
 			return property, nil
 		}
 	}
-	return nil, grpc.Errorf(grpc.Code(hspb.GetPropertyResponse{}), "Property not found")
+	return nil, errors.New("Property not found")
 }
 
 func main() {

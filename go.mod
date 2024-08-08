@@ -1,4 +1,4 @@
-module home
+module github.com/chokevin
 
 go 1.22.5
 

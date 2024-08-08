@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package homeserver;
 
-option go_package = "github.com/chokevin/home/homeserver";
+option go_package = "github.com/chokevin/protos/homeserver";
 
 // The real estate service definition.
 service HomeService {
