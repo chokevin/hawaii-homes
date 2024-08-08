@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package homeserver;
+
+option go_package = "github.com/chokevin/home/homeserver";
+
+// The real estate service definition.
+service HomeService {
+  // Gets property details by ID.
+  rpc GetProperty (GetPropertyRequest) returns (GetPropertyResponse);
+}
+
+// The request message containing the property ID.
+message GetPropertyRequest {
+  int32 id = 1;
+}
+
+// The response message containing property details.
+message GetPropertyResponse {
+  int32 id = 1;
+  string address = 2;
+  string city = 3;
+  string state = 4;
+  string zip_code = 5;
+  float price = 6;
+}
