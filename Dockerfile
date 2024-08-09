@@ -1,40 +1,20 @@
-# Stage 1: Build the Go binary
-FROM golang:1.22.5 AS builder
+# Use the official Golang image as the base image
+FROM golang:1.18
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy go.mod and go.sum files
-COPY go.mod go.sum ./
-
-# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
-RUN go mod download
-
-# Copy the source code
+# Copy the source code to the container
 COPY . .
 
-# Build the Go app
-RUN go build -o main ./cmd/home/home.go
+# Build the Go app for Linux
+RUN go build -o main .
 
-# Stage 2: Create a minimal image with the Go binary
-FROM ubuntu:22.04 AS build-release-stage
-
-WORKDIR /
-
-# Install necessary CA certificates for HTTPS requests
-RUN apk --no-cache add ca-certificates
-
-# Copy the binary from the builder stage
-COPY --from=builder /app/main /main
-
-# Expose port 50051 to the outside world
-EXPOSE 50051
-
-# Set executable permissions (if not already set)
-RUN chmod +x /main
+# Set executable permissions (if necessary)
+RUN chmod +x /app/main
 
 # Verify that the binary exists and is executable
-RUN ls -l /main
+RUN ls -l /app/main
 
-# Command to run the executable
-ENTRYPOINT ["/main"]
+# Set the entry point to the binary
+ENTRYPOINT ["/app/main"]
