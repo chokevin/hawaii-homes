@@ -11,13 +11,13 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy the source code
-COPY . .
+COPY *.go ./
 
 # Build the Go app
 RUN go build -o main ./cmd/home/home.go
 
 # Stage 2: Create a minimal image with the Go binary
-FROM alpine:latest
+FROM alpine:latest AS build-release-stage
 
 WORKDIR /
 
@@ -25,7 +25,7 @@ WORKDIR /
 RUN apk --no-cache add ca-certificates
 
 # Copy the binary from the builder stage
-COPY --from=builder /app/main /main
+COPY --from=builder /main /main
 
 # Expose port 50051 to the outside world
 EXPOSE 50051
