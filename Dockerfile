@@ -17,7 +17,7 @@ COPY . .
 RUN go build -o main ./cmd/home/home.go
 
 # Stage 2: Create a minimal image with the Go binary
-FROM alpine:latest AS build-release-stage
+FROM ubuntu:22.04 AS build-release-stage
 
 WORKDIR /
 
