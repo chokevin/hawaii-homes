@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: homes-app
-        image: homeserverhawaii.azurecr.io/homes:latest
+        image: homeserverhawaii.azurecr.io/homes:${COMMIT_SHA}
         ports:
         - containerPort: 8080

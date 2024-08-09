@@ -44,6 +44,12 @@ jobs:
         resource-group: homes
         cluster-name: 'homes-dev'
 
+    - name: Generate deployment manifest
+      env:
+        COMMIT_SHA: ${{ github.sha }}
+      run: |
+        envsubst < deployment.yaml.template > deployment.yaml
+
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f deployment.yaml
