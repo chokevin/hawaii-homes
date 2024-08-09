@@ -31,5 +31,8 @@ EXPOSE 50051
 # Set executable permissions (if not already set)
 RUN chmod +x /main
 
+# Verify that the binary exists and is executable
+RUN ls -l /main
+
 # Command to run the executable
 ENTRYPOINT ["/main"]
