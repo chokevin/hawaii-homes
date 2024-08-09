@@ -28,5 +28,8 @@ COPY --from=builder /app/main /main
 # Expose port 50051 to the outside world
 EXPOSE 50051
 
+# Set executable permissions (if not already set)
+RUN chmod +x /main
+
 # Command to run the executable
 ENTRYPOINT ["/main"]
