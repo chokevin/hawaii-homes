@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homes-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: homes-app
+  template:
+    metadata:
+      labels:
+        app: homes-app
+    spec:
+      containers:
+      - name: homes-app
+        image: homeserverhawaii.azurecr.io/homes:latest
+        ports:
+        - containerPort: 8080
