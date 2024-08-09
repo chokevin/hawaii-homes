@@ -25,7 +25,7 @@ WORKDIR /
 RUN apk --no-cache add ca-certificates
 
 # Copy the binary from the builder stage
-COPY --from=builder /main /main
+COPY --from=builder /app/main /main
 
 # Expose port 50051 to the outside world
 EXPOSE 50051
