@@ -35,8 +35,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t myregistry.azurecr.io/myapp:${{ github.sha }} .
-        docker push myregistry.azurecr.io/myapp:${{ github.sha }}
+        docker build -t homeserverhawaii.azurecr.io/myapp:${{ github.sha }} .
+        docker push homeserverhawaii.azurecr.io/myapp:${{ github.sha }}
 
     - name: Set up Kubernetes
       uses: azure/aks-set-context@v3
