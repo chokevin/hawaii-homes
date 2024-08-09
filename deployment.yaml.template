@@ -12,6 +12,8 @@ spec:
       labels:
         app: homes-app
     spec:
+      nodeSelector:
+          nodepool: homes
       containers:
       - name: homes-app
         image: homeserverhawaii.azurecr.io/homes:${COMMIT_SHA}
