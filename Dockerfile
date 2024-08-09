@@ -19,6 +19,8 @@ RUN go build -o main ./cmd/home/home.go
 # Stage 2: Create a minimal image with the Go binary
 FROM alpine:latest
 
+WORKDIR /
+
 # Install necessary CA certificates for HTTPS requests
 RUN apk --no-cache add ca-certificates
 
