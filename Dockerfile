@@ -22,5 +22,12 @@ RUN chmod +x /app/main
 # Verify that the binary exists and is executable
 RUN ls -l /app/main
 
+# Optional:
+# To bind to a TCP port, runtime parameters must be supplied to the docker command.
+# But we can document in the Dockerfile what ports
+# the application is going to listen on by default.
+# https://docs.docker.com/reference/dockerfile/#expose
+EXPOSE 50051
+
 # Set the entry point to the binary
 ENTRYPOINT ["/app/main"]
